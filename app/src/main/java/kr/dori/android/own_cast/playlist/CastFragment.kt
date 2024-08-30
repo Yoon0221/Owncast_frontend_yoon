@@ -70,17 +70,8 @@ class CastFragment() : Fragment(), ActivityMover {
             }
         }
 
-        binding.fragmentCastPlayIv.setOnClickListener {
-            CastPlayerData.setCast(castAdapter.dataList, 0)
-            ToPlayCast()
-        }
 
-        binding.fragmentCastShuffleIv.setOnClickListener {
-            val forShuffle: List<CastWithPlaylistId> = castAdapter.dataList
-            val shuffledList = forShuffle.shuffled()
-            CastPlayerData.setCast(shuffledList,0)
-            ToPlayCast()
-        }
+
         return binding.root
     }
 
@@ -161,6 +152,23 @@ class CastFragment() : Fragment(), ActivityMover {
                                     )
                                 }
                                 castAdapter.dataList = castListWithPlaylistId.toMutableList()
+
+                                if(!castAdapter.dataList.isNullOrEmpty()){
+                                    binding.fragmentCastPlayIv.setOnClickListener {
+                                        CastPlayerData.setCast(castAdapter.dataList, 0)
+                                        ToPlayCast()
+                                    }
+
+                                    binding.fragmentCastShuffleIv.setOnClickListener {
+                                        val forShuffle: List<CastWithPlaylistId> = castAdapter.dataList
+                                        val shuffledList = forShuffle.shuffled()
+                                        CastPlayerData.setCast(shuffledList,0)
+                                        ToPlayCast()
+                                    }
+                                }else{
+                                    binding.fragmentCastPlayIv.isEnabled = false
+                                    binding.fragmentCastShuffleIv.isEnabled = false
+                                }
                                 // 총 오디오 길이 계산
                                 val totalAudioLengthInSeconds = getTotalAudioLengthInSeconds(castListWithPlaylistId)
                                 binding.castInfo.text = "${castListWithPlaylistId.size}개, ${formatTime(totalAudioLengthInSeconds)}"
@@ -192,6 +200,22 @@ class CastFragment() : Fragment(), ActivityMover {
                                     )
                                 }
                                 castAdapter.dataList = castListWithPlaylistId.toMutableList()
+                                if(!castAdapter.dataList.isNullOrEmpty()){
+                                    binding.fragmentCastPlayIv.setOnClickListener {
+                                        CastPlayerData.setCast(castAdapter.dataList, 0)
+                                        ToPlayCast()
+                                    }
+
+                                    binding.fragmentCastShuffleIv.setOnClickListener {
+                                        val forShuffle: List<CastWithPlaylistId> = castAdapter.dataList
+                                        val shuffledList = forShuffle.shuffled()
+                                        CastPlayerData.setCast(shuffledList,0)
+                                        ToPlayCast()
+                                    }
+                                }else{
+                                    binding.fragmentCastPlayIv.isEnabled = false
+                                    binding.fragmentCastShuffleIv.isEnabled = false
+                                }
                                 // 총 오디오 길이 계산
                                 val totalAudioLengthInSeconds = getTotalAudioLengthInSeconds(castListWithPlaylistId)
                                 binding.castInfo.text = "${castListWithPlaylistId.size}개, ${formatTime(totalAudioLengthInSeconds)}"

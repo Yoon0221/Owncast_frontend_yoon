@@ -108,10 +108,11 @@ class PlaylistCategoryAdapter(private val editListener: EditCategoryListener, pr
                                         imagePath = cast.imagePath
                                     )
                                 }
-                                //CastPlayerData.setCastList(castList)  // 캐스트 리스트를 저장
-                                CastPlayerData.setCast(castListWithPlaylistId, 0)
-                                activityMover.ToPlayCast()
-
+                                if(!castListWithPlaylistId.isNullOrEmpty()){
+                                    //CastPlayerData.setCastList(castList)  // 캐스트 리스트를 저장
+                                    CastPlayerData.setCast(castListWithPlaylistId, 0)
+                                    activityMover.ToPlayCast()
+                                }
                             }
                         }
                     } else {
@@ -122,7 +123,6 @@ class PlaylistCategoryAdapter(private val editListener: EditCategoryListener, pr
                 }
             }
         }
-
     }
 }
 
